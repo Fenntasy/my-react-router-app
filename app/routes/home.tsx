@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
+import { Link, useLoaderData } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,6 +9,15 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export function loader() {
+  return {
+    key: "Subpage"
+  }
+}
+
 export default function Home() {
-  return <Welcome />;
+  const data = useLoaderData<typeof loader>();
+  return <>
+    <Link className="text-blue-500 underline" to="/subpage">{data.key}</Link>
+  </>;
 }
