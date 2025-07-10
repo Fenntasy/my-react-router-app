@@ -18,15 +18,16 @@ export async function action({ request }: Route.ActionArgs) {
 
 export default function Compute() {
   const data = useActionData<typeof action>();
+  const navigation = useNavigation();
 
   return (
     <>
       <h1>Compute</h1>
       <Form method="post">
         <div className="w-full">
-          <input className="border" type="text" name="one" />
+          <input className="border" type="text" name="one" value={navigation.formData?.get("one")?.toString()} />
           <span>*</span>
-          <input className="border" type="text" name="two" />
+          <input className="border" type="text" name="two" value={navigation.formData?.get("two")?.toString()} />
           <span>=</span>
           <span className="border min-w-16">
             result:&nbsp;{data ? data.result : null}
